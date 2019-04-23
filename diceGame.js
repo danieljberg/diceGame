@@ -1,7 +1,7 @@
 let driverRough = 3
 let driverFairway = 15
 let approachMiss = 1
-let approachGreen = 5
+let approachGreen = 6
 let missedShot = 2
 let holeNumber = 1
 
@@ -9,7 +9,11 @@ function rollDie(sides){
 	let myRoll = Math.floor((Math.random() * sides) + 1);
 	return myRoll
 }
-
+function rollDieDistance(min , max){
+	let myRoll = Math.floor(Math.random() * (min - max) ) + min;
+	return myRoll
+}
+console.log(rollDieDistance(225,300))
 
 /*
 let shotDirection = Math.floor((Math.random() * 5) + 1);
@@ -24,7 +28,7 @@ let shotLengthPutter = Math.floor((Math.random() * 4) + 1);
 console.log("Welcome to Hole #" + holeNumber);
 console.log("Grab your club and step up to the tee box");
 
-function ballLieFirstShot(rough,fairway){
+function ballLieFirstShot(rough , fairway){
 	let myRoll = rollDie(fairway);
 	console.log(myRoll);
 	if (myRoll <= rough){
@@ -42,17 +46,17 @@ function ballLieFirstShot(rough,fairway){
 
 }
 
-/*
-function ballLieSecondShot(miss,green){
+
+function ballLieSecondShot(miss , green){
 	if (myBall === "Left Rough" || myBall === "Right Rough"){
 		green = green - missedShot;
 		let myRoll = rollDie(green);
 		console.log(myRoll);
-		if (myRoll <= miss){
+		if (myRoll == miss){
 			let ballLie = "Missed Green Left";
 			return ballLie;
 		}
-		else if (myRoll >= green - miss){
+		else if (myRoll == green){
 			let ballLie = "Missed Green Right";
 			return ballLie;
 		}
@@ -64,11 +68,11 @@ function ballLieSecondShot(miss,green){
 	else{
 		let myRoll = rollDie(green);
 		console.log(myRoll);
-		if (myRoll <= miss){
+		if (myRoll == miss){
 			let ballLie = "Missed Green Left";
 			return ballLie;
 		}
-		else if (myRoll >= green - miss){
+		else if (myRoll == green){
 			let ballLie = "Missed Green Right";
 			return ballLie;
 		}
@@ -78,7 +82,7 @@ function ballLieSecondShot(miss,green){
 		}
 	}
 }
-*/
+
 
 
 function ballDistance(club){
