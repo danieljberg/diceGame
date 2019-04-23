@@ -1,4 +1,4 @@
-let driverRough = 4
+let driverRough = 3
 let driverFairway = 15
 let approachMiss = 1
 let approachGreen = 5
@@ -23,9 +23,10 @@ let shotLengthPutter = Math.floor((Math.random() * 4) + 1);
 
 console.log("Welcome to Hole #" + holeNumber);
 console.log("Grab your club and step up to the tee box");
+
 function ballLieFirstShot(rough,fairway){
-	let myRoll = rollDie(fairway)
-	console.log(myRoll)
+	let myRoll = rollDie(fairway);
+	console.log(myRoll);
 	if (myRoll <= rough){
 		let ballLie = "Left Rough";
 		return ballLie;
@@ -38,30 +39,46 @@ function ballLieFirstShot(rough,fairway){
 		let ballLie = "Fairway";
 		return ballLie;
 	}
+
 }
 
+/*
 function ballLieSecondShot(miss,green){
-	let myRoll = rollDie(club)
-	console.log(myRoll)
-	if (ballLieFirstShot() = "Left Rough" || "Right Rough"){
-		let green = green - missedShot;
-	
+	if (myBall === "Left Rough" || myBall === "Right Rough"){
+		green = green - missedShot;
+		let myRoll = rollDie(green);
+		console.log(myRoll);
+		if (myRoll <= miss){
+			let ballLie = "Missed Green Left";
+			return ballLie;
+		}
+		else if (myRoll >= green - miss){
+			let ballLie = "Missed Green Right";
+			return ballLie;
+		}
+		else {
+			let ballLie = "Hit Green";
+			return ballLie;
+		}
 	}
-
-	if (myRoll <= miss){
-		let ballLie = "Missed Green Left";
-		return ballLie;
-	}
-	else if (myRoll >= club - green){
-		let ballLie = "Missed Green Right";
-		return ballLie;
-	}
-	else {
-		let ballLie = "Hit Green";
-		return ballLie;
+	else{
+		let myRoll = rollDie(green);
+		console.log(myRoll);
+		if (myRoll <= miss){
+			let ballLie = "Missed Green Left";
+			return ballLie;
+		}
+		else if (myRoll >= green - miss){
+			let ballLie = "Missed Green Right";
+			return ballLie;
+		}
+		else {
+			let ballLie = "Hit Green";
+			return ballLie;
+		}
 	}
 }
-
+*/
 
 
 function ballDistance(club){
@@ -71,6 +88,9 @@ function ballDistance(club){
 
 
 
+let myBall = ballLieFirstShot(driverRough,driverFairway);
+console.log("You hit the ball in the " + myBall);
 
-console.log(ballLieFirstShot(driverRough,driverFairway))
+myBall = ballLieSecondShot(approachMiss,approachGreen);
+console.log("On your second hit you " + myBall);
 
