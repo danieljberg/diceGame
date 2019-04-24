@@ -152,7 +152,7 @@ function playHole(hole, distance, par) {
 			console.log("On to the Next Hole");
 		}
 	}
-	console.log("This is how many shots you took: " + holeShots);
+	//console.log("This is how many shots you took: " + holeShots);
 	return holeShots;
 	
 }
@@ -161,19 +161,16 @@ function holeScore(par, shots){
 	return myScore;
 }
 function playGame(){
-	let hole = [1, 2]
-	let holeDistance = [410, 433]
-	let par = [4, 4];
+	let hole = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	let holeDistance = [410, 433, 172, 510, 420, 437, 413, 579, 218]
+	let par = [4, 4, 3, 5, 4, 4, 4, 5, 3];
 	let score = 0;
-
-	for (var i = 0; i < hole.length; i++) {
-		console.log("Welcome to Hole #" + hole[i]);
-		console.log("Par: " + par[i] + "     Distance: " + holeDistance[i])
-		console.log("Grab your club and step up to the tee box");
-		
+	let numberOfHoles = prompt("Enter the number of holes you would like to play")
+	for (var i = 0; i < numberOfHoles; i++) {
+		alert("Welcome to Hole #" + hole[i] + "\nPar: " + par[i] + "     Distance: " + holeDistance[i] + "\nGrab your club and step up to the tee box");
 		let holeShots = playHole(hole[i], holeDistance[i], par[i]);
 		score += holeScore(par[i], holeShots);
-		console.log("Your score is: " + score);
+		alert("After hole #" + hole[i] + "\nYou took " + holeShots + " shots on a par " + par[i] + "\nYour total score is: " + score);
 	}
 }
 
