@@ -93,53 +93,53 @@ function wedgeShot(miss, dice, wedgeMadeIt){
 		return ballLie;
 	}
 }
-function playHole(hole, distance, par, totalShots) {
+function playHole(hole, distance, par) {
 	// what numbers are inside array [value to miss right of left, dice side value, min distance, max distance]
 	let driver = [5,30,225,300];
 	let shortApproach = [3,15,50,150];
-	let longApproach = [4,20,100,250]
+	let longApproach = [4,20,100,225]
 	let wedge = [1,5];
 	let wedgeMadeIt = 3;
 	let putter = [1,3];
 
+	let holeShots = 0
+
 	let missedShot = 2;
 	let holeNumber = hole;
-	
-	let shots = totalShots
 
 	let myBall = teeShot(driver[0], driver[1]);
 	console.log("You hit the ball " + rollDieDistance(driver[2], driver[3]) + "yrds in the " + myBall);
-	shots++;
-	myBall = secondShot(approach[0], approach[1], myBall, missedShot);
-	console.log("On your second hit you hit the ball " + rollDieDistance(approach[2], approach[3]) + "yrds and " + myBall);
-	shots++;
+	holeShots++;
+	myBall = secondShot(longApproach[0], longApproach[1], myBall, missedShot);
+	console.log("On your second hit you hit the ball " + rollDieDistance(longApproach[2], longApproach[3]) + "yrds and " + myBall);
+	holeShots++;
 	if (myBall === "Hit The Green"){
 		myBall = puttBall(putter[0], putter[1])
 		console.log("On your next shot you used your putter to hit the ball " + myBall);
-		shots++;
+		holeShots++;
 		if (myBall === "In the Cup"){
 			console.log("On to the Next Hole");
 		}
 		else{ 
 			console.log("On your next shot you just tapped in your ball");
-			shots++;
+			holeShots++;
 			console.log("On to the Next Hole");
 		}
 	}
 	else{
 		myBall = wedgeShot(wedge[0], wedge[1], wedgeMadeIt);
 		console.log("On your next shot you used your wedge to hit the ball " + myBall);
-		shots++;
+		holeShots++;
 		if (myBall === "In the Cup"){
 			console.log("On to the Next Hole");
 		}
 		else if (myBall === "Short of Cup"){;
 			myBall = puttBall(putter[0], putter[1]);
 			console.log("On your next shot you used your putter to hit the ball " + myBall);
-			shots++
+			holeShots++
 				if (myBall === "Left of Hole" || myBall === "Right of Hole"){
 					console.log("On your next shot you just tapped in your ball");
-					shots++;
+					holeShots++;
 					console.log("On to the Next Hole");
 				}
 				else{
@@ -148,39 +148,32 @@ function playHole(hole, distance, par, totalShots) {
 		}	
 		else{
 			console.log("On your next shot you just tapped in your ball");
-			shots++;
+			holeShots++;
 			console.log("On to the Next Hole");
 		}
 	}
-	console.log("This is how many shots you have: " + shots);
-
-	if(shots === par){
-		console.log("Your score is: " + score)
-	}
-	else if(shots < par){
-		console.log("Your score is: " + (score - (par[0] - shots)))
-	}
-	else{
-		console.log("Your score is: " + (score + (shots - par[0])))
-	}
+	console.log("This is how many shots you took: " + holeShots);
+	return holeShots;
+	
 }
-function keepScore(score){
-	let score = 0;
-}
-function keepShots(shots){
-	let shots = 0;
+function holeScore(par, shots){
+	let myScore = shots - par;
+	return myScore;
 }
 function playGame(){
 	let hole = [1, 2]
-	let holeDistance = [400, 500]
-	let par = [4, 5];
-	let score = keepScore();
-	let shots = keepShots();
+	let holeDistance = [410, 433]
+	let par = [4, 4];
+	let score = 0;
+
 	for (var i = 0; i < hole.length; i++) {
-		console.log("Welcome to Hole #" + hole[1]);
+		console.log("Welcome to Hole #" + hole[i]);
+		console.log("Par: " + par[i] + "     Distance: " + holeDistance[i])
 		console.log("Grab your club and step up to the tee box");
-		playHole(hole[i], holeDistance[i], par[i], shots);
+		
+		let holeShots = playHole(hole[i], holeDistance[i], par[i]);
+		score += holeScore(par[i], holeShots);
+		console.log("Your score is: " + score);
 	}
-	
 }
-playGame();
+
